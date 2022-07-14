@@ -2,12 +2,16 @@
 [run]
 branch = True
 source = src
+relative_files = True
 # omit = bad_file.py
 
 [paths]
 source =
     src/
     */site-packages/
+
+[xml]
+output=coverage-reports/coverage.xml
 
 [report]
 # Regexes for lines to exclude from consideration
