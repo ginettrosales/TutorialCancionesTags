@@ -26,4 +26,6 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Coverage
         id: coverage
-        run: python -m coverage xml -i 
+        run: |
+          python -m coverage xml -i 
+          cat coverage-reports/coverage.xml
