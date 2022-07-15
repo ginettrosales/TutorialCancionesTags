@@ -24,7 +24,7 @@ jobs:
       - name: pruebas+coverage
         id: pruebas
         run: | 
-          python -m unittest discover -s tests
+          python -m coverage run -m unittest discover tests 
           python -m coverage xml -i 
           cat coverage-reports/coverage.xml
 
