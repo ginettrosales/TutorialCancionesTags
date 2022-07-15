@@ -25,6 +25,11 @@ jobs:
         id: pruebas
         run: | 
           python -m coverage run -m unittest discover tests 
-          python -m coverage xml -i 
-          cat coverage-reports/coverage.xml
+          python -m coverage xml -i  
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 
