@@ -1,6 +1,6 @@
 from src.modelo.album import Album, Medio
 from src.modelo.cancion import Cancion
-from src.modelo.declarative_base import engine, Base, session
+from src.modelo.declarative_base import engine, Base, session, SQLAlchemyError, StatementError
 from src.modelo.interprete import Interprete
 
 
