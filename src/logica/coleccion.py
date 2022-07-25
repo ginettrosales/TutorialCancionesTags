@@ -89,6 +89,17 @@ class Coleccion():
                     return True
                 else:
                     return False
+            elif album_id <= 0:
+                nuevaCancion = Cancion(titulo=titulo, minutos=minutos, segundos=segundos, compositor=compositor)
+                for item in interpretes:
+                    interprete = Interprete(nombre=item["nombre"], texto_curiosidades=item["texto_curiosidades"],
+                                            cancion=nuevaCancion.id)
+                    session.add(interprete)
+                    interpretesCancion.append(interprete)
+                nuevaCancion.interpretes = interpretesCancion
+                session.add(nuevaCancion)
+                session.commit()
+                return True
             else:
                 nuevaCancion = Cancion(titulo=titulo, minutos=minutos, segundos=segundos, compositor=compositor)
                 for item in interpretes:
