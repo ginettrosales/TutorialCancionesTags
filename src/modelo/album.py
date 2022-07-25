@@ -22,5 +22,3 @@ class Album(Base):
     medio = Column(Enum(Medio))
     canciones = relationship('Cancion', secondary='album_cancion')
 
-    def __del__(self):
-        print("removing destructor")
