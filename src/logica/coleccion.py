@@ -43,7 +43,7 @@ class Coleccion():
             return True
         except SQLAlchemyError as e:
             return False
-        except ArgumentError as e:
+        except SQLAlchemyError as e:
             return False
         except:
             return False
