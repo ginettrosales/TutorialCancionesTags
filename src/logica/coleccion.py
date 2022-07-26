@@ -1,6 +1,6 @@
 from src.modelo.album import Album, Medio
 from src.modelo.cancion import Cancion
-from src.modelo.declarative_base import engine, Base, session, SQLAlchemyError, ArgumentError
+from src.modelo.declarative_base import engine, Base, session, SQLAlchemyError, ArgumentError, text
 from src.modelo.interprete import Interprete
 
 
@@ -67,14 +67,10 @@ class Coleccion():
 
     def dar_album_por_id(self, album_id):
         
-        resultproxy =  session.execute('SELECT * from Album where id={}'.format(album_id))
-        album = [{column: value for column, value in rowproxy.items()} for rowproxy in resultproxy]
-        if len(album) == 0:
-            return None
-        else:
-            return album[0]
-        #
-        #return resultproxy.first()[0]
+        consulta  =  text('SELECT * from Album where id=%s' % album_id)
+        query = session.query(Album).from_statement(consulta)
+        return query.one().__dict__
+
 
     def buscar_albumes_por_titulo(self, album_titulo):
         albumes = [elem.__dict__ for elem in
