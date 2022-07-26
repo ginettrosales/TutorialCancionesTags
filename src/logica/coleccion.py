@@ -1,6 +1,6 @@
 from src.modelo.album import Album, Medio
 from src.modelo.cancion import Cancion
-from src.modelo.declarative_base import engine, Base, session, SQLAlchemyError, StatementError
+from src.modelo.declarative_base import engine, Base, session, SQLAlchemyError, ArgumentError
 from src.modelo.interprete import Interprete
 
 
@@ -43,7 +43,9 @@ class Coleccion():
             return True
         except SQLAlchemyError as e:
             return False
-        except StatementError as e:
+        except ArgumentError as e:
+            return False
+        except:
             return False
 
 
