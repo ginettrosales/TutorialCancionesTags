@@ -42,8 +42,10 @@ class Coleccion():
             session.commit()
             return True
         except SQLAlchemyError as e:
+            print(e)
             return False
         except SQLAlchemyError as e:
+            print(e)
             return False
         except:
             return False
