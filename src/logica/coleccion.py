@@ -43,10 +43,10 @@ class Coleccion():
             return True
         except SQLAlchemyError as e:
             print(e)
-            return False
+            yield False
         except SQLAlchemyError as e:
             print(e)
-            return False
+            yield False
         except:
             return False
 
