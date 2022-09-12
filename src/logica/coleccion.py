@@ -65,6 +65,15 @@ class Coleccion():
                 interpretes.append(interprete.nombre)
         return interpretes
 
+    def dar_interpretes_de_album_duplicado(self, album_id):
+        canciones = session.query(Cancion).filter(Cancion.albumes.any(Album.id.in_([album_id]))).all()
+        interpretes = []
+        for cancion in canciones:
+            for interprete in cancion.interpretes:
+                interpretes.append(interprete.nombre)
+        return interpretes
+
+
     def dar_album_por_id(self, album_id):
         
         consulta  =  text('SELECT * from Album where id=%s' % album_id)
