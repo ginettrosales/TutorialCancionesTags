@@ -70,6 +70,7 @@ class Ventana_Album(QWidget):
         layout_datos.addWidget(etiqueta_medio, 3, 0)
 
         #Creación de campos de texto editable y la lista desplegable
+        #sonar test
 
         self.texto_album = QLineEdit()
         layout_datos.addWidget(self.texto_album, 0, 1)
