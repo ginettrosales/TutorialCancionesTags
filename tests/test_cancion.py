@@ -27,6 +27,16 @@ class CancionTestCase(unittest.TestCase):
         cancion = self.coleccion.agregar_cancion(titulo_cancion, minutos_cancion, segundos_cancion, compositor_cancion, -1, [])
         self.assertEqual(cancion, False)
 
+    def test_cancion_mala(self):
+        # Nombre aleatorio
+        titulo_cancion = self.data_factory.name()
+        # Número aleatorio entre 0 y 60
+        minutos_cancion = self.data_factory.pyint(0, 60)
+        segundos_cancion = self.data_factory.pyint(0, 60)
+        compositor_cancion = self.data_factory.name()
+        cancion = self.coleccion.agregar_cancion(titulo_cancion, minutos_cancion, segundos_cancion, compositor_cancion, "hola", [])
+        self.assertEqual(cancion, False)
+
     def test_cancion_varios_interpretes(self):
         nombre_interprete1 = self.data_factory.name()
         # Frase aleatoria

@@ -73,3 +73,8 @@ class InterpreteTestCase(unittest.TestCase):
                                              'texto_curiosidades': texto_curiosidades}])
         consulta2 = self.coleccion.buscar_canciones_por_interprete("Jorge")
         self.assertEqual(len(consulta2), 2)
+
+
+    def test_dar_interpretes_de_album_duplicado(self):
+        canciones = self.coleccion.dar_interpretes_de_album_duplicado(1)
+        self.assertEqual(len(canciones), 0)
