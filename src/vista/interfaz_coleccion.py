@@ -214,7 +214,7 @@ class App(QApplication):
         '''
         Método para mostrar los resultados de búsqueda de intérpretes por nombre
         '''
-        interpretes = self.logica.buscar_interpretes_por_nombre(nombre_interprete)
+        interpretes = []
         if len(interpretes) == 0:
             mensaje_error = QMessageBox()
             mensaje_error.setIcon(QMessageBox.Critical)
@@ -235,7 +235,7 @@ class App(QApplication):
         '''
         Método para asociar una canción a un album
         '''
-        self.logica.asociar_cancion(id_cancion, id_album)
+        
         self.ventana_album.mostrar_album(self.logica.dar_album_por_id(id_album))
         self.ventana_album.mostrar_canciones(self.logica.dar_canciones_de_album(id_album))
 
