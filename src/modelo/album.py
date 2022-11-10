@@ -12,6 +12,8 @@ class Medio(enum.Enum):
     CD = 3
 
 
+
+
 class Album(Base):
     __tablename__ = 'album'
 
