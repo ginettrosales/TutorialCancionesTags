@@ -42,7 +42,7 @@ class AlbumTestCase(unittest.TestCase):
     def test_eliminar_album(self):
         self.coleccion.eliminar_album(1)
         consulta = self.session.query(Album).filter(Album.id == 1).first()
-        self.assertIsNotNone(consulta)
+        self.assertIsNone(consulta)
 
     def test_dar_albumes(self):
         consulta1 = self.coleccion.dar_albumes()
