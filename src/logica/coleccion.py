@@ -44,11 +44,7 @@ class Coleccion():
         except SQLAlchemyError as e:
             print(e)
             yield False
-        except SQLAlchemyError as e:
-            print(e)
-            yield False
-        except:
-            return False
+       
 
 
     def dar_albumes(self):
@@ -120,18 +116,7 @@ class Coleccion():
                 session.add(nuevaCancion)
                 session.commit()
                 return True
-            else:
-                nuevaCancion = Cancion(titulo=titulo, minutos=minutos, segundos=segundos, compositor=compositor)
-                for item in interpretes:
-                    interprete = Interprete(nombre=item["nombre"], texto_curiosidades=item["texto_curiosidades"],
-                                            cancion=nuevaCancion.id)
-                    session.add(interprete)
-                    interpretesCancion.append(interprete)
-                nuevaCancion.interpretes = interpretesCancion
-                session.add(nuevaCancion)
-                session.commit()
-                return True
-
+         
     def editar_cancion(self, cancion_id, titulo, minutos, segundos, compositor, interpretes):
         busqueda = session.query(Cancion).filter(Cancion.titulo == titulo, Cancion.id != cancion_id).all()
         if len(busqueda) == 0:
@@ -234,7 +219,7 @@ class Coleccion():
             session.delete(interprete)
             session.commit()
             return True
-        except:
+        except SQLAlchemyError as e:
             return False
 
     def dar_interpretes(self):
