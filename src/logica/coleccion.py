@@ -44,11 +44,7 @@ class Coleccion():
         except SQLAlchemyError as e:
             print(e)
             yield False
-        except SQLAlchemyError as e:
-            print(e)
-            yield False
-        except:
-            return False
+       
 
 
     def dar_albumes(self):
@@ -66,11 +62,8 @@ class Coleccion():
         return interpretes
 
     def dar_interpretes_de_album_duplicado(self, album_id):
-        canciones = session.query(Cancion).filter(Cancion.albumes.any(Album.id.in_([album_id]))).all()
+        session.query(Cancion).filter(Cancion.albumes.any(Album.id.in_([album_id]))).all()
         interpretes = []
-        for cancion in canciones:
-            for interprete in cancion.interpretes:
-                interpretes.append(interprete.nombre)
         return interpretes
 
 
@@ -120,18 +113,7 @@ class Coleccion():
                 session.add(nuevaCancion)
                 session.commit()
                 return True
-            else:
-                nuevaCancion = Cancion(titulo=titulo, minutos=minutos, segundos=segundos, compositor=compositor)
-                for item in interpretes:
-                    interprete = Interprete(nombre=item["nombre"], texto_curiosidades=item["texto_curiosidades"],
-                                            cancion=nuevaCancion.id)
-                    session.add(interprete)
-                    interpretesCancion.append(interprete)
-                nuevaCancion.interpretes = interpretesCancion
-                session.add(nuevaCancion)
-                session.commit()
-                return True
-
+         
     def editar_cancion(self, cancion_id, titulo, minutos, segundos, compositor, interpretes):
         busqueda = session.query(Cancion).filter(Cancion.titulo == titulo, Cancion.id != cancion_id).all()
         if len(busqueda) == 0:
@@ -154,16 +136,9 @@ class Coleccion():
             return False
 
     def eliminar_cancion(self, cancion_id):
-        try:
-            cancion = session.query(Cancion).filter(Cancion.id == cancion_id).first()
-            if cancion is not None:
-                session.delete(cancion)
-                session.commit()
-                return True
-            else:
-                return False
-        except:
+            session.query(Cancion).filter(Cancion.id == cancion_id).first()
             return False
+        
 
     def dar_canciones(self):
         canciones = [elem.__dict__ for elem in session.query(Cancion).all()]
@@ -194,15 +169,6 @@ class Coleccion():
                 Cancion.interpretes.any(Interprete.nombre.ilike('%{0}%'.format(interprete_nombre)))).all()
         return canciones
     
-    def asociar_cancion(self, cancion_id, album_id):
-        cancion = session.query(Cancion).filter(Cancion.id == cancion_id).first()
-        album = session.query(Album).filter(Album.id == album_id).first()
-        if cancion is not None and album is not None:
-            album.canciones.append(cancion)
-            session.commit()
-            return True
-        else:
-            return False
 
     def agregar_interprete(self, nombre, texto_curiosidades, cancion_id):
         busqueda = session.query(Interprete).filter(Interprete.nombre == nombre).all()
@@ -234,14 +200,10 @@ class Coleccion():
             session.delete(interprete)
             session.commit()
             return True
-        except:
+        except SQLAlchemyError as e:
+            print(e)
             return False
 
     def dar_interpretes(self):
         interpretes = [elem.__dict__ for elem in session.query(Interprete).all()]
-        return interpretes
-
-    def buscar_interpretes_por_nombre(self, interprete_nombre):
-        interpretes = [elem.__dict__ for elem in session.query(Interprete).filter(
-            Interprete.nombre.ilike('%{0}%'.format(interprete_nombre))).all()]
         return interpretes

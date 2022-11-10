@@ -263,7 +263,6 @@ class Ventana_Album(QWidget):
         '''
         Método para asociar la canción existente al album
         '''
-        self.interfaz.asociar_cancion(self.album_actual["id"], id_cancion)
         self.dialogo_agregar_cancion.close()
         
 
