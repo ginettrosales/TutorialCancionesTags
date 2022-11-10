@@ -77,4 +77,4 @@ class InterpreteTestCase(unittest.TestCase):
 
     def test_dar_interpretes_de_album_duplicado(self):
         canciones = self.coleccion.dar_interpretes_de_album_duplicado(1)
-        
+        self.assertEqual(len(canciones), 0)
